@@ -25,7 +25,7 @@ Este repositorio contiene **9 problemas** progresivos para que un estudiante des
     go run ./problema9
     ```
 
-5. Para cada problema, busca los comentarios `// TODO:` y sigue las indicaciones.
+5. Para cada problema, busca los comentarios `.// TODO:` y sigue las indicaciones.
  
 6. Para detectar condiciones de carrera, puedes ejecutar el detector de carreras:
 
