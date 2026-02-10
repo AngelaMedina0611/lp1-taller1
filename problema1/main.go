@@ -1,38 +1,33 @@
 package main
 
 import (
+	"math/rand"
 	"fmt"
 	"sync"
 	"time"
 )
 
-// Objetivo: Lanzar varias goroutines que imprimen mensajes y esperar a que todas terminen.
-// TODO: Completa los pasos marcados con TODO para entender goroutines y WaitGroup.
-
 func worker(id int, veces int, wg *sync.WaitGroup) {
-	// TODO: asegurar que al finalizar la función se haga wg.Done()
+	defer wg.Done()
 	
-
 	for i := 1; i <= veces; i++ {
 		fmt.Printf("[worker %d] hola %d\n", id, i)
-		ms : rand.Intn(201) + 100
-		time.Sleep(time.Duration(ms)) * time.millisecond
+		ms := rand.Intn(201) + 100
+		time.Sleep(time.Duration(ms) * time.Millisecond)
 	}
 }
 
 func main() {
+	rand.Seed(time.Now().UnixNano()) // semilla aleatoria
 	var wg sync.WaitGroup
-
-	// TODO: cambiar estos parámetros y observar el intercalado de salidas
-	// numGoroutines
-	// veces
-
-	// TODO: lanzar varias goroutines, sumar al WG y esperar con wg.Wait()
+	numGoroutines:= 3
+	veces := 5
+	// lanzar varias goroutines 
 	for id := 1; id <= numGoroutines; id++ {
-
+		wg.Add(1)
+		go worker (id,veces,&wg) 
 	}
-
 	// Esperar a que todas las goroutines terminen
-	
+	wg.Wait()
 	fmt.Println("Listo: todas las goroutines terminaron.")
 }
