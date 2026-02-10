@@ -27,4 +27,7 @@ func main() {
 		wg.Add(1)
 		go worker (id,veces,&wg) 
 	}
-	
+	// Esperar a que todas las goroutines terminen
+	wg.Wait()
+	fmt.Println("Listo: todas las goroutines terminaron.")
+}
