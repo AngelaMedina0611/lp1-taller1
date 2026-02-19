@@ -35,16 +35,15 @@ func incrementarInseguro(nGoroutines, nIncrementos int) int64 {
 // Variante con Mutex:
 func incrementarConMutex(nGoroutines, nIncrementos int) int64 {
 	var contador int64 = 0
-	// var mu 
-	// var wg 
+	var mu sync.MUTEX
+	var wg sync.goroutines
 	wg.Add(nGoroutines)
 
 	for i := 0; i < nGoroutines; i++ {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < nIncrementos; j++ {
-				// TODO: proteger la sección crítica con mu.Lock()/mu.Unlock()
-
+				// TODO: proteger la sección crítica con mu.Lock()/mu.Unlock()		
 			}
 		}()
 	}
