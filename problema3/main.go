@@ -35,8 +35,8 @@ func incrementarInseguro(nGoroutines, nIncrementos int) int64 {
 // Variante con Mutex:
 func incrementarConMutex(nGoroutines, nIncrementos int) int64 {
 	var contador int64 = 0
-	var mu sync.MUTEX
-	var wg sync.goroutines
+	var mu sync.Mutex
+	var wg sync.WaitGroup
 	wg.Add(nGoroutines)
 
 	for i := 0; i < nGoroutines; i++ {
@@ -66,8 +66,8 @@ func incrementarConAtomic(nGoroutines, nIncrementos int) int64 {
 			defer wg.Done()
 			for j := 0; j < nIncrementos; j++ {
 			// se usa  atomic.AddInt64(&contador, 1)
-			automatic.AddInt64(&contador, 1)
-			
+			atomic.AddInt64(&contador, 1)
+
 
 			}
 		}()
