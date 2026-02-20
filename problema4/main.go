@@ -18,7 +18,7 @@ func productor(n int, out chan<- int) {
 		v := rand.Intn(100)
 		fmt.Printf("[productor] envía %d\n", v)
 		out <- v
-		 
+		time.Sleep(time.Duration(rand.Intn(400)+100) * time.Millisecond) // ver el flujo 
 	}
 }
 
