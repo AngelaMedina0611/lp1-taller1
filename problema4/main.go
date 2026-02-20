@@ -37,7 +37,7 @@ func main() {
 	valores := 10
 	consumidores := 3
 
-	ch := make(chan int,) //  prueba cambiar a canal bufferizado: make(chan int, 4)
+	ch := make(chan int, 4) //  prueba cambiar a canal bufferizado: make(chan int, 4)
 
 	var wg sync.WaitGroup
 	wg.Add(consumidores)
