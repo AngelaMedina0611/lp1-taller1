@@ -24,10 +24,10 @@ func productor(n int, out chan<- int) {
 
 func consumidor(id int, in <-chan int, wg *sync.WaitGroup) {
 	defer wg.Done()
-	for v := range in { // TODO: leer hasta que canal se cierre
+	for v := range in { //leer hasta que canal se cierre
 		fmt.Printf("[consumidor %d] recibe %d\n", id, v)
-		// TODO: simular trabajo
-		// usa Sleep con un valor aleatorio entre 100 y 500 ms
+		//  simular trabajo
+		
 	}
 	fmt.Printf("[consumidor %d] canal cerrado, termina\n", id)
 }
