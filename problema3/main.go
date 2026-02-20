@@ -43,7 +43,7 @@ func incrementarConMutex(nGoroutines, nIncrementos int) int64 {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < nIncrementos; j++ {
-				// TODO: proteger la sección crítica con mu.Lock()/mu.Unlock()	
+			// proteger la sección crítica con mu.Lock()/mu.Unlock()	
 				mu.Lock()
 				contador = contador + 1 
 				mu.Unlock()	
@@ -65,7 +65,9 @@ func incrementarConAtomic(nGoroutines, nIncrementos int) int64 {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < nIncrementos; j++ {
-				// TODO: usar atomic.AddInt64(&contador, 1)
+			// se usa  atomic.AddInt64(&contador, 1)
+			automatic.AddInt64(&contador, 1)
+			
 
 			}
 		}()
