@@ -37,15 +37,15 @@ func main() {
 	valores := 10
 	consumidores := 3
 
-	ch := make(chan int) // TODO: prueba cambiar a canal bufferizado: make(chan int, 4)
+	ch := make(chan int,) //  prueba cambiar a canal bufferizado: make(chan int, 4)
 
 	var wg sync.WaitGroup
 	wg.Add(consumidores)
-	// TODO: lanzar las goroutines consumidoras
+	//  lanzar las goroutines consumidoras
 	for i := 1; i <= consumidores; i++ {
-
+		go consumidor (i, ch, &wg)
 	}
-
+	//lanzar el productor 
 	go productor(valores, ch)
 
 	wg.Wait()
