@@ -10,16 +10,15 @@ import (
 // Objetivo: Implementar Productor–Consumidor con canales.
 // Un productor genera N valores y los envía por un canal; varios consumidores los procesan.
 // Practicar cierre de canal y uso de WaitGroup.
-// TODO: completa los pasos marcados.
+
 
 func productor(n int, out chan<- int) {
-	defer close(out) // TODO: cerrar el canal cuando no haya más datos
+	defer close(out) // cerrar el canal cuando no haya más datos
 	for i := 1; i <= n; i++ {
 		v := rand.Intn(100)
 		fmt.Printf("[productor] envía %d\n", v)
 		out <- v
-		// TODO: dormir un poco para ver el flujo
-		// usa Sleep con un valor aleatorio entre 100 y 500 ms
+		 
 	}
 }
 

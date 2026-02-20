@@ -65,10 +65,9 @@ func incrementarConAtomic(nGoroutines, nIncrementos int) int64 {
 		go func() {
 			defer wg.Done()
 			for j := 0; j < nIncrementos; j++ {
-			// se usa  atomic.AddInt64(&contador, 1)
+			// se usa  atomic.
 			atomic.AddInt64(&contador, 1)
-
-
+			
 			}
 		}()
 	}
