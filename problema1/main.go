@@ -11,8 +11,13 @@ func worker(id int, veces int, wg *sync.WaitGroup) {
 	defer wg.Done()
 	
 for i := 1; i <= veces; i++ {
+
+	// imprime el numero de la iteración
 		fmt.Printf("[worker %d] hola %d\n", id, i)
+	
+	//genera un numero aleatorio entre 100 y 300
 		ms := rand.Intn(201) + 100
+	// pausa la gourotine para simular trabajo
 		time.Sleep(time.Duration(ms) * time.Millisecond)
 	}
 }
