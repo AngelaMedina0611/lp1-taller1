@@ -27,7 +27,7 @@ func consumidor(id int, in <-chan int, wg *sync.WaitGroup) {
 	for v := range in { //leer hasta que canal se cierre
 		fmt.Printf("[consumidor %d] recibe %d\n", id, v)
 		//  simular trabajo
-		
+		time.Sleep(time.Duration(rand.Intn(400)+100) * time.Millisecond)
 	}
 	fmt.Printf("[consumidor %d] canal cerrado, termina\n", id)
 }
