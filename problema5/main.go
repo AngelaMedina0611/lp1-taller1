@@ -17,7 +17,8 @@ type baseDatos struct {
 }
 
 func (db *baseDatos) leer(clave string) (int, bool) {
-	// TODO: usar RLock/RUnlock (o Lock/Unlock si usas Mutex)
+	db.mu.RLock() // bloqueo de lectura 
+	defer db.mu.RUnlock() // libera al salir 
 
 	v, ok := db.m[clave]
 	return v, ok
