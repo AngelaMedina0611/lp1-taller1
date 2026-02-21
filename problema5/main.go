@@ -19,14 +19,13 @@ type baseDatos struct {
 func (db *baseDatos) leer(clave string) (int, bool) {
 	db.mu.RLock() // bloqueo de lectura 
 	defer db.mu.RUnlock() // libera al salir 
-
 	v, ok := db.m[clave]
 	return v, ok
 }
 
 func (db *baseDatos) escribir(clave string, valor int) {
-	// TODO: usar Lock/Unlock para escritura
-
+	db.mu.Lock() // bloqueo de escritura
+	defer db.mu.Unlock() // libera al salir 
 	db.m[clave] = valor
 }
 
