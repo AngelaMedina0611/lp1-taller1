@@ -56,13 +56,15 @@ func seguroOrdenado() {
 	// Regla: siempre adquirir mu1 luego mu2 (mismo orden en todos)
 	lockEnOrden := func(a, b *sync.Mutex) func() func() {
 		// retorna: lock():unlock()
-		return func() func() {
-			var mu1, mu2 sync.mutex
+		var mu1, mu2 sync.mutex
 			var wg sync.WaitGroup
 			wg.Add(2)
-
+		return func() func() {
+			a.Lock()
+			b.Lock()
 			return func() {
-				// TODO: liberar b luego a
+				a.Unlock()
+				b.unlock()
 
 			}
 		}
