@@ -91,6 +91,6 @@ func main() {
 	fmt.Println("=== Elige una sección para ejecutar ===")
 	
 
-	 deadlock()      // <- provocará interbloqueo
-	//seguroOrdenado()   // <- versión segura
+	 //deadlock()      // <- provocará interbloqueo
+	seguroOrdenado()   // <- versión segura
 }
