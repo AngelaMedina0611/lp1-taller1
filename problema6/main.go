@@ -9,7 +9,7 @@ import (
 // Objetivo: Provocar un deadlock con dos mutex y dos goroutines que adquieren
 // recursos en orden distinto. Luego evitarlo imponiendo un orden global.
 // NOTA: La versión con deadlock se quedará bloqueada: ejecútala, observa y luego cambia a la versión segura.
-// TODO: completa/activa la sección que quieras probar.
+
 
 func deadlock() {
 	var mu1, mu2 sync.Mutex
@@ -27,7 +27,7 @@ func deadlock() {
 
 		fmt.Println("G1: listo")
 		mu1.Unlock()
-		mu2.unlock()
+		mu2.Unlock()
 	}()
 
 	go func() {
@@ -40,8 +40,8 @@ func deadlock() {
 		mu1.Lock()
 
 		fmt.Println("G2: listo")
-		mu2.unlock()
-		mu1.unlock()
+		mu2.Unlock()
+		mu1.Unlock()
 	}()
 
 	// ADVERTENCIA: esto no retornará por el deadlock
@@ -56,15 +56,12 @@ func seguroOrdenado() {
 	// Regla: siempre adquirir mu1 luego mu2 (mismo orden en todos)
 	lockEnOrden := func(a, b *sync.Mutex) func() func() {
 		// retorna: lock():unlock()
-		var mu1, mu2 sync.mutex
-			var wg sync.WaitGroup
-			wg.Add(2)
 		return func() func() {
 			a.Lock()
 			b.Lock()
 			return func() {
 				a.Unlock()
-				b.unlock()
+				b.Unlock()
 
 			}
 		}
@@ -92,8 +89,8 @@ func seguroOrdenado() {
 
 func main() {
 	fmt.Println("=== Elige una sección para ejecutar ===")
-	// TODO: comenta/activa la versión que desees probar
+	
 
-	// deadlock()      // <- provocará interbloqueo
-	seguroOrdenado()   // <- versión segura
+	 deadlock()      // <- provocará interbloqueo
+	//seguroOrdenado()   // <- versión segura
 }
