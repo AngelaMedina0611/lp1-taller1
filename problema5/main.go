@@ -61,12 +61,12 @@ func main() {
 
 	// precarga
 	for _, k := range claves {
-
+		db.escribir(k, rand.Intn(100))
 	}
 
 	var wg sync.WaitGroup
 
-	// TODO: experimenta con # de lectores y escritores
+	//  # de lectores y escritores
 	nLectores := 5
 	nEscritores := 2
 
