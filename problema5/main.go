@@ -70,7 +70,7 @@ func main() {
 	var wg sync.WaitGroup
 
 	//  # de lectores y escritores
-	nLectores := 3
+	nLectores := 5
 	nEscritores := 2
 
 	wg.Add(nLectores + nEscritores)
