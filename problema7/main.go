@@ -47,10 +47,10 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	// TODO: lanzar nWorkers workers
+	//  lanzar nWorkers workers
 	wg.Add(nWorkers)
 	for i := 1; i <= nWorkers; i++ {
-
+		go worker(i, jobos, results, &wg)
 	}
 
 	// TODO: productor de trabajos
