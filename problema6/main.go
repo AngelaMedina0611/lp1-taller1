@@ -26,18 +26,22 @@ func deadlock() {
 		mu2.Lock()// adquirir mu2
 
 		fmt.Println("G1: listo")
+		mu1.Unlock()
+		mu2.unlock()
 	}()
 
 	go func() {
 		defer wg.Done()
 		fmt.Println("G2: Lock mu2") 
-		// TODO: adquirir mu2
+		mu2.Lock()
 
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(100 * time.Millisecond) 
 		fmt.Println("G2: Lock mu1") 
-		// TODO: adquirir mu1
+		mu1.Lock()
 
 		fmt.Println("G2: listo")
+		mu2.unlock()
+		mu1.unlock()
 	}()
 
 	// ADVERTENCIA: esto no retornará por el deadlock
