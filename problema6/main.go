@@ -57,7 +57,9 @@ func seguroOrdenado() {
 	lockEnOrden := func(a, b *sync.Mutex) func() func() {
 		// retorna: lock():unlock()
 		return func() func() {
-			// TODO: adquirir a luego b
+			var mu1, mu2 sync.mutex
+			var wg sync.WaitGroup
+			wg.Add(2)
 
 			return func() {
 				// TODO: liberar b luego a
