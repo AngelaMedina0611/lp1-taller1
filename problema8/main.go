@@ -39,8 +39,14 @@ func main() {
 	}()
 	return out
 }
+// varios futuros , recolecta sus resultados: f1, f2, f3
+func main(){
+	f1 := asyncCuadrado(2)
+	f2 := asyncCuadrado(3)
+	f3 := asyncCuadrado(4)
+}
 
-	// TODO: crea varios futuros y recolecta sus resultados: f1, f2, f3
+	
 
 	// TODO: Opción 1: esperar cada futuro secuencialmente
 
