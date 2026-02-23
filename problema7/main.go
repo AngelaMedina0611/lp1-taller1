@@ -29,7 +29,7 @@ func worker(id int, jobs <-chan trabajo, results chan<- resultado, wg *sync.Wait
 		r := resultado {
 			ID:  j.ID,
 			X:   j.X,
-			procesado: j.X * 2, // duplicar el valor
+			Procesado: j.X * 2, // duplicar el valor
 		}
 
 		fmt.Printf("[worker %d] procesa trabajo %d -> %d\n", id, j.ID, r.Procesado)
@@ -50,7 +50,7 @@ func main() {
 	//  lanzar nWorkers workers
 	wg.Add(nWorkers)
 	for i := 1; i <= nWorkers; i++ {
-		go worker(i, jobos, results, &wg)
+		go worker(i, jobs, results, &wg)
 	}
 
 	//  productor de trabajos
@@ -64,7 +64,7 @@ func main() {
 		close(jobs) // importante: cerrar para que los workers terminen
 	}()
 
-	// TODO: recolectar resultados en otra goroutine y cerrar results al final
+	//  recolectar resultados en otra goroutine y cerrar results al final
 	var wgCollect sync.WaitGroup
 	wgCollect.Add(1)
 	go func() {
