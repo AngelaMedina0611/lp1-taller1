@@ -53,9 +53,12 @@ func main() {
 		go worker(i, jobos, results, &wg)
 	}
 
-	// TODO: productor de trabajos
+	//  productor de trabajos
 	go func() {
 		for i := 1; i <= nTrabajos; i++ {
+			j := trabajo {ID: i, X: i}
+			fmt.Printf("[main] encolando trabajo %d\n", j.ID)
+			jobs <- j
 
 		}
 		close(jobs) // importante: cerrar para que los workers terminen
