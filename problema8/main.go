@@ -7,20 +7,39 @@ import (
 
 // Objetivo: Simular "futuros" en Go usando canales. Una función lanza trabajo asíncrono
 // y retorna un canal de solo lectura con el resultado futuro.
-// TODO: completa las funciones y experimenta con varios futuros a la vez.
+// completa las funciones y experimenta con varios futuros a la vez.
 
 func asyncCuadrado(x int) <-chan int {
 	ch := make(chan int)
 	go func() {
 		defer close(ch)
-		// TODO: simular trabajo
-
+		//  simular trabajo pesado
+		time.Sleep(time.Duration(x) * 200 * time.Millisecond)
 		ch <- x * x
 	}()
 	return ch
 }
-
+// fanIn combina multiples canales en uno
 func main() {
+	func fanIn(chs ...<-chan int) <-chan int {
+	out := make(chan int)
+	go func() {
+		var wg sync.WaitGroup
+		wg.Add(len(chs))
+		for _, c := range chs {
+			go func(c <-chan int) {
+				defer wg.Done()
+				for v := range c {
+					out <- v
+				}
+			}(c)
+		}
+		wg.Wait()
+		close(out)
+	}()
+	return out
+}
+
 	// TODO: crea varios futuros y recolecta sus resultados: f1, f2, f3
 
 	// TODO: Opción 1: esperar cada futuro secuencialmente
