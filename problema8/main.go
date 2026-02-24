@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"time"
+	"sync"
 )
 
 // Objetivo: Simular "futuros" en Go usando canales. Una función lanza trabajo asíncrono
@@ -20,8 +21,7 @@ func asyncCuadrado(x int) <-chan int {
 	return ch
 }
 // pista fanIn combina multiples canales en uno
-func main() {
-	func fanIn(chs ...<-chan int) <-chan int {
+func fanIn(chs ...<-chan int) <-chan int {
 	out := make(chan int)
 	go func() {
 		var wg sync.WaitGroup
@@ -45,7 +45,7 @@ func main(){
 	f2 := asyncCuadrado(3)
 	f3 := asyncCuadrado(4)
 // Opción 1: esperar cada futuro secuencialmente
-	fmt.Printf("Resultados secuenciales")
+	fmt.Println("Resultados secuenciales")
 	fmt.Println(<-f1)
 	fmt.Println(<-f2)
 	fmt.Println(<-f3)
@@ -53,9 +53,9 @@ func main(){
 	fmt.Printf("Resultados con fan-in")
 	fan := fanIn(asyncCuadrado(5), asyncCuadrado(6), asyncCuadrado(7))
 	for r := range fan {
-		fmt.Printf(r)
+		fmt.Println(r)
 	}
 }
 
 
-}
+
