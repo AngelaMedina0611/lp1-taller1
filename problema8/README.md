@@ -56,5 +56,7 @@ Se simula trabajo asíncrono que retorna resultados futuros y luego se combinan 
 - Patrón Fan-In
 
 # Autor:
+
 Angela Maria Medina Ruiz
+
 Problema 8
