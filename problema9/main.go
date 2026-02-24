@@ -18,7 +18,20 @@ func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 0; i < 3; i ++{ // cada filosofo come 3 veces 
 		pensar (id)
+// Estrategia segura: tomar primero el tenedor con menor dirección 
+		var primero, segundo * tenedor 
+		if fmt.Printf("%p",izq) < fmt.Printf("%p", der){
+			primero, segundo = izq, der 
+		} else {
+			primero, segundo = der, izq
+		}
+		primero.mu.Lock()
+		segundo.mu.Lock()
 
+		comer(id)
+
+		segundo.mu.Unlock()
+		primero.mu.Unlock()
 	}
 	
 	fmt.Printf("[filósofo %d] satisfecho\n", id)
