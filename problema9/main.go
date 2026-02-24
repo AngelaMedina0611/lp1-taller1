@@ -40,13 +40,14 @@ func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
 func pensar(id int) {
 	fmt.Printf("[filósofo %d] pensando...\n", id)
 	//simular tiempo de pensar
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(300 * time.Millisecond)
 
 }
 
 func comer(id int) {
 	fmt.Printf("[filósofo %d] COMIENDO\n", id)
-	// TODO: simular tiempo de pensar
+	// simular tiempo de comer
+	time.Sleep(500 * time.Millisecond)
 
 }
 
