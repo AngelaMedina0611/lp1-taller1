@@ -10,12 +10,16 @@ import (
 // Hay 5 filósofos y 5 tenedores (recursos). Cada filósofo necesita 2 tenedores para comer.
 // Estrategia segura: imponer un **orden global** al tomar los tenedores (primero el menor ID, luego el mayor)
 // para evitar deadlock. También puedes limitar concurrencia (ej. mayordomo).
-// TODO: completa la lógica de toma/soltado de tenedores y bucle de pensar/comer.
+//  completa la lógica de toma/soltado de tenedores y bucle de pensar/comer.
 
 type tenedor struct{ mu sync.Mutex }
-
+// codigo para el folosofo
 func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
-	// TODO: desarrolla el código para el filósofo
+	defer wg.Done()
+	for i := 0; i < 3; i ++{ // cada filosofo come 3 veces 
+		pensar (id)
+
+	}
 	
 	fmt.Printf("[filósofo %d] satisfecho\n", id)
 }
