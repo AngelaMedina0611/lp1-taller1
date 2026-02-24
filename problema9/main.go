@@ -20,7 +20,7 @@ func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
 		pensar (id)
 // Estrategia segura: tomar primero el tenedor con menor dirección 
 		var primero, segundo * tenedor 
-		if fmt.Printf("%p",izq) < fmt.Printf("%p", der){
+		if izq < der {
 			primero, segundo = izq, der 
 		} else {
 			primero, segundo = der, izq
