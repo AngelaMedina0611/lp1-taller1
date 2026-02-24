@@ -68,7 +68,8 @@ func main() {
 	for i := 0; i < n; i++ {
 		izq := forks[i]
 		der := forks[(i+1)%n]
-		// TODO: lanzar goroutine para el filósofo i
+	//lanzar goroutine para el filósofo i
+		go filosofo(i, izq, der, &wg)
 
 	}
 
