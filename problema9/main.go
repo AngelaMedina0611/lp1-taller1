@@ -11,8 +11,12 @@ import (
 // Estrategia segura: imponer un **orden global** al tomar los tenedores (primero el menor ID, luego el mayor)
 // para evitar deadlock. También puedes limitar concurrencia (ej. mayordomo).
 //  completa la lógica de toma/soltado de tenedores y bucle de pensar/comer.
-
-type tenedor struct{ mu sync.Mutex }
+// cada tenedor tiene un id y un mutex
+type tenedor struct{
+	id int
+	mu sync.Mutex
+}
+	
 // codigo para el folosofo
 func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
 	defer wg.Done()
@@ -20,7 +24,7 @@ func filosofo(id int, izq, der *tenedor, wg *sync.WaitGroup) {
 		pensar (id)
 // Estrategia segura: tomar primero el tenedor con menor dirección 
 		var primero, segundo * tenedor 
-		if izq < der {
+		if izq.id < der.id {
 			primero, segundo = izq, der 
 		} else {
 			primero, segundo = der, izq
@@ -60,7 +64,7 @@ func main() {
 	forks := make([]*tenedor, n)
 	for i := 0; i < n; i++ {
 	// inicializar  tenedor i
-		forks[i] = &tenedor{}
+		forks[i] = &tenedor{id: i}
 
 	}
 
