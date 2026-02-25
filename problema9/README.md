@@ -6,7 +6,7 @@
 
 - El objetivo es permitir que 5 filósofos compartan 5 tenedores sin generar deadlock.
 
-# 🧠 Estrategia de Solución
+## 🧠 Estrategia de Solución
 
 - Para evitar el deadlock se impone un orden global:
 
@@ -14,7 +14,7 @@
 
 - Esto elimina la condición de espera circular, evitando el bloqueo mutuo.
 
-# ⚙️ Funcionamiento
+## ⚙️ Funcionamiento
 
 Cada filósofo:
 
@@ -30,11 +30,11 @@ Cada filósofo:
 
 - Se usa sync.WaitGroup para esperar que todos finalicen.
 
-# ▶️ Ejecución
+## ▶️ Ejecución
 
 - go run ./problema9
 
-# 🧩 Conceptos Aplicados
+## 🧩 Conceptos Aplicados
 
 - Concurrencia en Go
 
@@ -46,6 +46,6 @@ Cada filósofo:
 
 - Prevención de deadlock
 
-# Autor:
+## Autor:
 Angela Maria Medina Ruiz
 Taller 1 problema 9
